@@ -2,4 +2,7 @@
 
 return [
     App\Providers\AppServiceProvider::class,
+    App\Providers\Filament\AdminPanelProvider::class,
+    App\Providers\Filament\RikiulirPanelProvider::class,
+    App\Providers\Filament\Ti1aPanelProvider::class,
 ];
