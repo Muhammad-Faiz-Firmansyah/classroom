@@ -5,11 +5,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return redirect("/student");
+    if(Auth::user()->role == "student"){
+        Auth::logout();
+    }
+        return redirect("/student");
 });
 Route::resource("/tasks", TaskController::class)->name("index","student.dashboard");
 Route::post('/logout', function () {
-    Auth::guard('student')->logout();
+    Auth::logout();
     request()->session()->invalidate();
     request()->session()->regenerateToken();
 
