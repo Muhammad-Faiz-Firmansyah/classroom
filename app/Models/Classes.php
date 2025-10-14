@@ -9,6 +9,10 @@ class Classes extends Model
 {
     protected $guarded = ['id'];
 
+    protected $fillable = [
+        "class_name"
+    ];
+
     public function tasks(){
         return $this->hasMany(Task::class);
 

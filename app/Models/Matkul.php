@@ -7,4 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Matkul extends Model
 {
     protected $guarded = ["id"];
+
+    protected $fillable = [
+        "matkul_name"
+    ];
 }
