@@ -15,10 +15,14 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $user = User::where("id",Auth::user()->id)->with("class")->first();
-        // return response()->json($user);
-        $tasks = Task::query()->where("class_id", $user->class->id)->get();
-        return view("pages.tasks",compact("tasks","user"));
+        $user = User::where("id", Auth::user()->id)->with("class")->first();
+        $tasks = Task::query()
+            ->where("class_id", $user->class->id)
+            ->orderByRaw('CASE WHEN deadline < ? THEN 1 ELSE 0 END', [now()])
+            ->orderBy("deadline", "asc")
+            ->get();
+
+        return view("pages.tasks", compact("tasks", "user"));
     }
 
     /**
